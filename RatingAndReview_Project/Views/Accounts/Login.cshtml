@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+
+<body>
+    <h3>Login</h3>
+    @ViewBag.error
+    <form method="post" action="@Url.Action("Login", "Accounts")">
+        <table cellpadding="2" cellspacing="2">
+            <tr>
+                <td>Username</td>
+                <td><input type="text" name="username" /> </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password" /> </td>
+
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" name="Login" /> </td>
+                <br />
+                <a href="@Url.Action("SignUp","Accounts")">SignUp</a>
+
+            </tr>
+
+
+
+
+        </table>
+
+
+
+    </form>
+
+
+
+</body>
+</html>
+

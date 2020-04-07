@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+}
+
+@model RatingAndReview_Project.Models.Account
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+
+<body>
+    <h3>SignUp</h3>
+    @using (Html.BeginForm("SignUp","Accounts",FormMethod.Post))
+    {
+        <table cellpadding="2" cellspacing="2">
+            <tr>
+                <td>Username</td>
+                <td>@Html.TextBoxFor(model => model.Username)</td>
+            </tr>
+            <tr>
+                <td>Fullname</td>
+                <td>@Html.TextBoxFor(model => model.FullName)</td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>@Html.TextBoxFor(model => model.APassword) </td>
+
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" value="Save"/> </td>
+
+            </tr>
+
+
+
+
+        </table>
+
+
+    }
+
+
+
+
+</body>
+</html>
+
