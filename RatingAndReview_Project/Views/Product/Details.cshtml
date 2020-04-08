@@ -69,14 +69,29 @@
     </table>
     <h3>Rating and Comments</h3>
     <table border="1" cellpadding="2" cellspacing="2">
-
+        @{ int i = 1;}
         @foreach(var review in ViewBag.product.Reviews)
         {
             <tr>
                 <td>
-                    @review.Account.Username <br  /> @review.Rating <br  /> @review.ContentC
+                    @review.Account.Username
+                    <br />
+                    <script>
+                        $(function () {
+
+                            $('#@("rating" + i)').rateYo({
+                                rating:  @review.Rating,
+                                readOnly: true
+                                
+                            });
+                        });
+                    </script>
+                    <div id="@("rating" + i)"></div>
+                  
+                    <br /> @review.ContentC
                 </td>
             </tr>
+            i++;
         }
 
 
