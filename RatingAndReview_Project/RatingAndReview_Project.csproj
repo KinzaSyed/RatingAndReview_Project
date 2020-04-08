@@ -196,7 +196,15 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Content\rateyo\jquery.rateyo.less" />
+    <Content Include="Content\rateyo\jquery.rateyo.min.css.map" />
+    <Content Include="Content\rateyo\jquery.rateyo.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Content\rateyo\jquery.min.js" />
+    <Content Include="Content\rateyo\jquery.rateyo.css" />
+    <Content Include="Content\rateyo\jquery.rateyo.js" />
+    <Content Include="Content\rateyo\jquery.rateyo.min.css" />
+    <Content Include="Content\rateyo\jquery.rateyo.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

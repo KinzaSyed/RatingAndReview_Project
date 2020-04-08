@@ -19,8 +19,30 @@ namespace RatingAndReview_Project.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            ViewBag.product = db.Products.Find(id);
-            return View();
+
+
+            var product = db.Products.Find(id);
+            ViewBag.product = product;
+            var review = new Review()
+            {
+                ProductId = product.id
+        };
+            return View("Details", review);
         }
+        [HttpPost]
+        public ActionResult SendReview(Review review, double rating)
+        {
+            string username = Session["username"].ToString();
+            review.DatePost = DateTime.Now;
+            review.AccountId = db.Accounts.Single(a => a.Username.Equals(username)).id;
+            review.Rating = rating;
+            db.Reviews.Add(review);
+            db.SaveChanges();
+            return RedirectToAction("Details", "Product", new { id = review.ProductId });
+
+        }
+
+        
+
     }
 }

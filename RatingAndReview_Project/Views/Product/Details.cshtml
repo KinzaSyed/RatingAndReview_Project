@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
+@model RatingAndReview_Project.Models.Review
 
 <h2>Index</h2>
 
@@ -9,12 +10,33 @@
 
 <head>
     <meta name="viewport" content="width=device-width" />
-<title>Index</title>
+    <title>Index</title>
+    <link href="~/Content/rateyo/jquery.rateyo.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/rateyo/jquery.min.js"></script>
+    <script src="~/Content/rateyo/jquery.rateyo.min.js"></script>
+    <script>
+        $(function () {
+
+            $("#rateYo").rateYo({
+                rating: 0,
+                numStars: 5,
+                maxValue: 5,
+                halfStar: true,
+                onChange: function (rating, rateYoInstance) {
+                    $('#rating').val(rating);
+                }
+            });
+        });
+    </script>
+
+
+
 </head>
 <body>
     <h3>Products Details</h3>
+
     <table border="1">
-        <br  />
+        <br />
         <a href="@Url.Action("Index", "Product")">Back</a>
         <tr>
             <td>Product id</td>
@@ -30,36 +52,86 @@
         </tr>
         <tr>
             <td>Image</td>
-        <td><img src="~/Content/Images/@ViewBag.product.Photo" width="60" /> </td>
-        
-         </tr>   
+            <td><img src="~/Content/Images/@ViewBag.product.Photo" width="60" /> </td>
+
+        </tr>
         <tr>
             <td>Price</td>
             <td>@ViewBag.product.Price</td>
         </tr>
-        <tr>    
-            
+        <tr>
+
             <td>Quantity</td>
-            
-        <td>@ViewBag.product.Quantity</td>
-            </tr>
-        
+
+            <td>@ViewBag.product.Quantity</td>
+        </tr>
+
     </table>
     <h3>Rating and Comments</h3>
+    <table border="1" cellpadding="2" cellspacing="2">
+
+        @foreach(var review in ViewBag.product.Reviews)
+        {
+            <tr>
+                <td>
+                    @review.Account.Username <br  /> @review.Rating <br  /> @review.ContentC
+                </td>
+            </tr>
+        }
+
+
+
+
+
+    </table>
+
     @if (Session["username"] == null)
     {
         <a href="@Url.Action("Login","Accounts")">
-    Login to post comments and rating</a>
+            Login to post comments and rating
+        </a>
 
+    }
+    else
+    {
+        using (Html.BeginForm("SendReview", "Product", FormMethod.Post))
+        {
+            <table cellpadding="2" cellspacing="2">
+
+                <tr>
+                    <td valign="top">Rating</td>
+                    <td>
+                        <div id="rateYo"></div>
+                        
+                        <input type="hidden" id="rating" name="rating" />
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td valign="top">Content</td>
+                    <td>@Html.TextAreaFor(model => model.ContentC, new { cols = 20, rows = 5 })</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" value="Send" />
+                        @Html.HiddenFor(model => model.ProductId)
+                    
+                    
+                    
+                    </td>
+                </tr>
+
+
+
+            </table>
+
+        }
     }
 
 
-
-
-
-
-
-</body>
+    </body>
 
 
 

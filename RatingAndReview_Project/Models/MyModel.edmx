@@ -36,26 +36,26 @@
           <Property Name="AccountId" Type="int" />
         </EntityType>
         <Association Name="FK_Review_Accounts">
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
-          <End Role="Review" Type="Self.Review" Multiplicity="0..1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Accounts">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Review">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="AccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Review_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Review" Type="Self.Review" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Review">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -97,7 +97,7 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="APassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Review" Relationship="RatingAndReviewModel.FK_Review_Accounts" FromRole="Account" ToRole="Review" />
+          <NavigationProperty Name="Reviews" Relationship="RatingAndReviewModel.FK_Review_Accounts" FromRole="Account" ToRole="Review" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -108,7 +108,7 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Review" Relationship="RatingAndReviewModel.FK_Review_Product" FromRole="Product" ToRole="Review" />
+          <NavigationProperty Name="Reviews" Relationship="RatingAndReviewModel.FK_Review_Product" FromRole="Product" ToRole="Review" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -124,30 +124,30 @@
           <NavigationProperty Name="Product" Relationship="RatingAndReviewModel.FK_Review_Product" FromRole="Review" ToRole="Product" />
         </EntityType>
         <Association Name="FK_Review_Accounts">
-          <End Type="RatingAndReviewModel.Account" Role="Account" Multiplicity="1" />
-          <End Type="RatingAndReviewModel.Review" Role="Review" Multiplicity="0..1" />
+          <End Type="RatingAndReviewModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="RatingAndReviewModel.Review" Role="Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Review">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="AccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Review_Product">
-          <End Type="RatingAndReviewModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="RatingAndReviewModel.Review" Role="Review" Multiplicity="0..1" />
+          <End Type="RatingAndReviewModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="RatingAndReviewModel.Review" Role="Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Review">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

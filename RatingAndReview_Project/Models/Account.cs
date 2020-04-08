@@ -14,11 +14,18 @@ namespace RatingAndReview_Project.Models
     
     public partial class Account
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Account()
+        {
+            this.Reviews = new HashSet<Review>();
+        }
+    
         public int id { get; set; }
         public string Username { get; set; }
         public string APassword { get; set; }
         public string FullName { get; set; }
     
-        public virtual Review Review { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }
